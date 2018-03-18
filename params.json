@@ -1,0 +1,16 @@
+{
+  "__comment__": "This file is meant to hold information pertaining the thresholds calculated by our automated system.",
+  "sensors": {
+    "piezoelectric": {
+      "threshold": 5
+    },
+    "eog": {
+      "threshold": 3
+    }
+  },
+  "fsm": {
+    "rem_to_wake": 1,
+    "wake_to_rem": 1,
+    "etc": 1
+  }
+}
