@@ -6,4 +6,7 @@ Project to classify sleep stages and induce dreams through stimulation.
 - https://www.ncbi.nlm.nih.gov/pubmed/7878174
 
 # FSM Rules
-- 
+-
+
+# Communication from USB to Computer over serial
+- "sensor1:100,sensor2:130,sensor3:200"

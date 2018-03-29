@@ -24,10 +24,10 @@ class USBCommunication:
     def while_reading_loop(self):
         while self.connected:
             self.current_reading = self.serial_port.readline().decode()
+            self.update_latest_value()
     def update_latest_value(self):
-        # parse by ','
-        #TODO fix this sudo code
-        for key in self.current_values.split(","):
+        for sensor_chunk in self.current_values.split(","):
+            sensor_name = sensor_chunk[0:sensor_chunk.find(":")]
             self.current_values[key] = value
     def get_current_values(self):
         return self.current_values
