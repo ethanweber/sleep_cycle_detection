@@ -3,7 +3,7 @@
 class StateMachine:
     def __init__(self, timer_class):
         self.current_state = None
-        self.state_history_length = state_history_length
+        self.state_history_length = timer_class.state_data_point_num
         self.state_history = []
     def get_state():
         return self.current_state

@@ -10,3 +10,7 @@ Project to classify sleep stages and induce dreams through stimulation.
 
 # Communication from USB to Computer over serial
 - "sensor1:100,sensor2:130,sensor3:200"
+
+# TODO
+- fix update_state part of code
+- add realtime plotting of data
