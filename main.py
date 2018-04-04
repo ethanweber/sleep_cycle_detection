@@ -7,11 +7,11 @@ import time
 
 
 # signal_interval, signal_history_window, state_interval, state_history_window in sec
-timer_class = TimerClass(0.25, 1.0, 60.0, 600) # for timer data
+timer_class = TimerClass(0.25, 1.0, 1.0, 100) # for timer data
 fsm_class = StateMachine(timer_class) # for updating the stage of sleep
 
 # create the comm class and start it to read values from the COM port
-comm_class = USBCommunication('COM1', 9600, fake=True)
+comm_class = USBCommunication('COM1', 9600, fake=True, write_to_csv=True)
 # for microcontroller attachment
 # comm_class.connect()
 # comm_class.start()
@@ -48,5 +48,7 @@ while True:
 
         fsm_class.update_state(eye_classification, body_classification)
         fsm_update_last_time = timer_class.get_time()
+
+        print("Current State: {}".format(fsm_class.get_state()))
 
     time.sleep(.025)

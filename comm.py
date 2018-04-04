@@ -8,7 +8,7 @@ import time
 import random
 
 class USBCommunication:
-    def __init__(self, port, baud, fake=False):
+    def __init__(self, port, baud, fake=False, write_to_csv=False):
         self.port = port
         self.baud = baud
         self.connected = False
@@ -17,6 +17,8 @@ class USBCommunication:
         self.thread = None
         # current_values is a dictionary for the sensors and their current readings
         self.current_values = {}
+
+        self.write_to_csv = write_to_csv #TODO use this to write to csv
 
         if fake is True:
             self.start_fake_data_loop()

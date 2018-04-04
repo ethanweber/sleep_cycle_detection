@@ -16,7 +16,7 @@ class SignalProcessing:
         self.num_data_points = self.time_class.signal_data_point_num # number of discrete data points to keep in the running history
 
     def get_body_classification(self):
-        return True
+        return False
 
     def get_eye_classification(self):
         return True
