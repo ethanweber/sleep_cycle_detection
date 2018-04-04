@@ -30,15 +30,14 @@ class StateMachine:
             del self.state_history[0]
             self.eye.append(new_state)
 
-
         # check if woken up and get the number of states in history
         body_mov_per = 0
         eye_mov_per = 0
         for i in self.state_history:
             if i[1] == True: body_mov_per += 1.0
             if i[0] == True: eye_mov_per += 1.0
-        body_mov_per = body_mov_per / len(self.state_history)
-        eye_mov_per = eye_mov_per / len(self.state_history)
+        body_mov_per = body_mov_per / len(self.state_history) # get percentage
+        eye_mov_per = eye_mov_per / len(self.state_history) # get percentage
 
         if self.current_state == "wake":
             # check if going to "nrem" (going to sleep)

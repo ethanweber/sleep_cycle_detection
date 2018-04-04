@@ -22,6 +22,9 @@ class USBCommunication:
 
         if fake is True:
             self.start_fake_data_loop()
+        else:
+            self.connect()
+            self.start()
     def connect(self):
         serial_port = serial.Serial(port, baud, timeout=0)
         self.connect = True

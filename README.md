@@ -14,3 +14,4 @@ Project to classify sleep stages and induce dreams through stimulation.
 # TODO
 - fix update_state part of code
 - add realtime plotting of data
+- write code to log to csv

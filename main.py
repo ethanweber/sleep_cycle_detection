@@ -11,16 +11,8 @@ timer_class = TimerClass(0.25, 1.0, 1.0, 100) # for timer data
 fsm_class = StateMachine(timer_class) # for updating the stage of sleep
 
 # create the comm class and start it to read values from the COM port
+# set fake to false if you want to connect to the microcontroller
 comm_class = USBCommunication('COM1', 9600, fake=True, write_to_csv=True)
-# for microcontroller attachment
-# comm_class.connect()
-# comm_class.start()
-# for fake data
-# comm_class.start_fake_data_loop() # this runs in the background with fake data
-# while True:
-#     vals = comm_class.get_current_values()
-#     print(vals)
-#     time.sleep(.001)
 
 # create the signal processing class to manage the comm data
 # USBCommunication() class, SignalTimer() class
@@ -39,7 +31,7 @@ while True:
         signal_class.update_with_new_datapoint() # update the sensor readings
         sensor_update_last_time = timer_class.get_time() # reset the last_update time
     # print(len(signal_class.eye))
-    print(signal_class.eye)
+    # print(signal_class.eye)
     # finite state machine update loop
     if (current_time - fsm_update_last_time) >= timer_class.state_interval:
         # update state with new data (body minute, eye minute)
