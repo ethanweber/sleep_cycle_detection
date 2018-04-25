@@ -1,12 +1,6 @@
 {
   "__comment__": "This file is meant to hold information pertaining the thresholds calculated by our automated system.",
   "sensors": {
-    "piezoelectric": {
-      "threshold": 5
-    },
-    "eog": {
-      "threshold": 3
-    },
     "acc_x": {
       "threshold": 5
     },

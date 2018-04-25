@@ -40,9 +40,9 @@ while True:
     if (current_time - sensor_update_last_time) >= timer_class.signal_interval:
         signal_class.update_with_new_datapoint() # update the sensor readings
         sensor_update_last_time = timer_class.get_time() # reset the last_update time
-        print("Latest Reading: {}".format(signal_class.eye[-1]))
-    # print(len(signal_class.eye))
-    # print(signal_class.eye[-1])
+
+        # for key in signal_class.sensor_data:
+        #     print("{}: {}".format(key, signal_class.sensor_data[key][-1]))
 
     # finite state machine update loop
     if (current_time - fsm_update_last_time) >= timer_class.state_interval:

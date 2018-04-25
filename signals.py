@@ -1,6 +1,7 @@
 import datetime
 import csv
 import os
+import json
 
 # this file is used for signal processing
 class SignalProcessing:
@@ -8,8 +9,8 @@ class SignalProcessing:
     def __init__(self, comm_class, time_class, write_to_csv=True):
         # array to hold the datapoints in an array of (timestamp, signal)
         # array of points for each sensor
-        self.eye = []
-        self.body = []
+        # self.eye = []
+        # self.body = []
 
         self.time_class = time_class
 
@@ -17,10 +18,23 @@ class SignalProcessing:
 
         self.num_data_points = self.time_class.signal_data_point_num # number of discrete data points to keep in the running history
 
+        # get json data to help
+        json_data = json.load(open('params.json'))
+        self.sensors = json_data["sensors"]
+
+        # dictionary to hold the sensor data and initialize it
+        self.sensor_data = {}
+        for sensor_name in self.sensors:
+            self.sensor_data[sensor_name] = []
+
         # csv information
         self.write_to_csv = write_to_csv
         dir = os.path.dirname(os.path.abspath(__file__))
         self.csv_save_path = dir + "/records/{}.csv".format(self.time_class.start_time)
+        # write the first row as the columns
+        data_row = [i for i in self.sensors]
+        data_row.append("time")
+        self.write_data_line(data_row)
 
     def get_body_classification(self):
         return False
@@ -38,26 +52,23 @@ class SignalProcessing:
     def update_with_new_datapoint(self):
         # check if the time is too far back
         current_time = self.time_class.get_time() # get the current time
-        eye_val = [self.comm_class.get_value("acc_x"), current_time]
-        body_val = [self.comm_class.get_value("acc_y"), current_time]
 
-        # for the eye
-        if len(self.eye) < self.num_data_points:
-            self.eye.append(eye_val)
-        else:
-            # delete one point and add a new one
-            del self.eye[0]
-            self.eye.append(eye_val)
+        data_row = []
+        # update each sensor
+        for sensor_name in self.sensors:
 
-        # for the body
-        if len(self.body) < self.num_data_points:
-            self.body.append(body_val)
-        else:
-            # delete one point and add a new one
-            del self.body[0]
-            self.body.append(body_val)
+            sensor_val = [self.comm_class.get_value(sensor_name), current_time]
+            data_row.append(sensor_val[0])
 
+            if len(self.sensor_data[sensor_name]) < self.num_data_points:
+                self.sensor_data[sensor_name].append(sensor_val)
+            else:
+                # delete one point and add a new one
+                del self.sensor_data[sensor_name][0]
+                self.sensor_data[sensor_name].append(sensor_val)
+
+        data_row.append(current_time)
 
         # write to csv if necessary
         if self.write_to_csv:
-            self.write_data_line(eye_val)
+            self.write_data_line(data_row)
