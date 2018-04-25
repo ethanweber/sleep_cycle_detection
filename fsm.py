@@ -28,7 +28,7 @@ class StateMachine:
         else:
             # delete one point and add a new one
             del self.state_history[0]
-            self.eye.append(new_state)
+            self.state_history.append(new_state)
 
         # check if woken up and get the number of states in history
         body_mov_per = 0
@@ -68,7 +68,3 @@ class StateMachine:
             elif eye_mov_per < self.rem_eye_thresh:
                 self.previous_state = "rem"
                 self.current_state = "nrem"
-
-        else:
-            # TODO throw an error because there must be a state
-            pass
