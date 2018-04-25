@@ -6,6 +6,15 @@
     },
     "eog": {
       "threshold": 3
+    },
+    "acc_x": {
+      "threshold": 5
+    },
+    "acc_y": {
+      "threshold": 3
+    },
+    "acc_z": {
+      "threshold": 3
     }
   },
   "fsm": {

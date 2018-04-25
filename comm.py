@@ -8,7 +8,7 @@ import time
 import random
 
 class USBCommunication:
-    def __init__(self, port, baud, fake=False, write_to_csv=False):
+    def __init__(self, port, baud, fake=False, write_to_csv=False, delay=0.001):
         self.port = port
         self.baud = baud
         self.connected = False
@@ -21,21 +21,33 @@ class USBCommunication:
         self.write_to_csv = write_to_csv #TODO use this to write to csv
 
         if fake is True:
-            self.start_fake_data_loop()
+            self.start_fake_data_loop(delay)
         else:
             self.connect()
-            self.start()
+            self.start(delay)
+    # function to get the latest value from the serial port
+    def get_latest_reading(self):
+        reading = None
+        while self.serial_port.inWaiting() > 0:
+            # strip the newline from the end
+            reading = str(self.serial_port.readline().decode())[:-1]
+        return reading
     def connect(self):
-        serial_port = serial.Serial(port, baud, timeout=0)
-        self.connect = True
+        self.serial_port = serial.Serial(self.port, self.baud)
+        self.connected = True
+        print("Connecting.")
     # this will start the thread that runs in the background
-    def start(self):
-        self.thread = threading.Thread(target=self.while_reading_loop, args=())
+    def start(self, delay=0.001):
+        self.thread = threading.Thread(target=self.while_reading_loop, kwargs={'delay': delay})
         self.thread.start()
-    def while_reading_loop(self):
+    def while_reading_loop(self, delay=0.001):
+        print("Starting the read loop.")
         while self.connected:
-            self.current_reading = self.serial_port.readline().decode()
-            self.update_latest_value()
+            self.current_reading = self.get_latest_reading()
+            if self.current_reading is not None:
+                # print(self.current_reading)
+                self.update_latest_value()
+            time.sleep(delay)
 
     def start_fake_data_loop(self, delay=0.001):
         self.thread = threading.Thread(target=self.fake_loop, kwargs={'delay': delay})
@@ -59,4 +71,8 @@ class USBCommunication:
     def get_current_values(self):
         return self.current_values
     def get_value(self, sensor_name):
-        return self.current_values[sensor_name]
+        # return None if the sensor values haven't been updated yet
+        if sensor_name in self.current_values:
+            return self.current_values[sensor_name]
+        else:
+            return None
