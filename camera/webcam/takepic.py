@@ -5,7 +5,7 @@ import os
 import sys
 import time
 cwd = os.path.dirname(os.path.abspath(__file__))
-img_dir = "{}/data/5-6-2018_0".format(cwd)
+img_dir = "{}/data/5-7-2018_0".format(cwd)
 
 print(img_dir)
 
