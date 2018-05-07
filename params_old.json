@@ -1,0 +1,37 @@
+{
+  "__comment__": "This file is meant to hold information pertaining the thresholds calculated by our automated system.",
+  "sensors": {
+    "acc_x": {
+      "threshold": 5
+    },
+    "acc_y": {
+      "threshold": 3
+    },
+    "acc_z": {
+      "threshold": 3
+    },
+    "gyro_x": {
+      "threshold": 5
+    },
+    "gyro_y": {
+      "threshold": 3
+    },
+    "gyro_z": {
+      "threshold": 3
+    },
+    "mag_x": {
+      "threshold": 5
+    },
+    "mag_y": {
+      "threshold": 3
+    },
+    "mag_z": {
+      "threshold": 3
+    }
+  },
+  "fsm": {
+    "rem_to_wake": 1,
+    "wake_to_rem": 1,
+    "etc": 1
+  }
+}

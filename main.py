@@ -7,12 +7,12 @@ import time
 
 
 # signal_interval, signal_history_window, state_interval, state_history_window in sec
-timer_class = TimerClass(0.5, 10.0, 1.0, 100) # for timer data
+timer_class = TimerClass(0.05, 10.0, 1.0, 100) # for timer data
 fsm_class = StateMachine(timer_class) # for updating the stage of sleep
 
 # create the comm class and start it to read values from the COM port
 # set fake to false if you want to connect to the microcontroller
-comm_class = USBCommunication('/dev/cu.usbmodem14611', 115200, fake=False, write_to_csv=True, delay=0.001)
+comm_class = USBCommunication('/dev/cu.usbmodem146131', 115200, fake=False, write_to_csv=True, delay=0.001)
 
 # create the signal processing class to manage the comm data
 # USBCommunication() class, SignalTimer() class

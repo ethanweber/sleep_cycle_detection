@@ -1,31 +1,10 @@
 {
   "__comment__": "This file is meant to hold information pertaining the thresholds calculated by our automated system.",
   "sensors": {
-    "acc_x": {
+    "left": {
       "threshold": 5
     },
-    "acc_y": {
-      "threshold": 3
-    },
-    "acc_z": {
-      "threshold": 3
-    },
-    "gyro_x": {
-      "threshold": 5
-    },
-    "gyro_y": {
-      "threshold": 3
-    },
-    "gyro_z": {
-      "threshold": 3
-    },
-    "mag_x": {
-      "threshold": 5
-    },
-    "mag_y": {
-      "threshold": 3
-    },
-    "mag_z": {
+    "right": {
       "threshold": 3
     }
   },
